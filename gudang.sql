@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 28, 2020 at 08:44 AM
--- Server version: 10.4.8-MariaDB
--- PHP Version: 7.3.10
+-- Generation Time: Jul 09, 2023 at 01:39 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `inventory`
+-- Database: `gudang`
 --
 
 -- --------------------------------------------------------
@@ -33,14 +32,15 @@ CREATE TABLE `notes` (
   `contents` text NOT NULL,
   `admin` varchar(20) NOT NULL,
   `status` varchar(8) NOT NULL DEFAULT 'aktif'
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `notes`
 --
 
 INSERT INTO `notes` (`id`, `contents`, `admin`, `status`) VALUES
-(21, 'Disini bisa tulis notes', 'Stock', 'aktif');
+(22, 'Selamat Siang..', 'Fajar', 'aktif'),
+(23, 'Tolong masukkan barang', 'Rizky', 'aktif');
 
 -- --------------------------------------------------------
 
@@ -55,7 +55,7 @@ CREATE TABLE `sbrg_keluar` (
   `jumlah` int(11) NOT NULL,
   `penerima` varchar(35) NOT NULL,
   `keterangan` text NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `sbrg_keluar`
@@ -76,7 +76,7 @@ CREATE TABLE `sbrg_masuk` (
   `tgl` date NOT NULL,
   `jumlah` int(11) NOT NULL,
   `keterangan` text NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `sbrg_masuk`
@@ -97,14 +97,17 @@ CREATE TABLE `slogin` (
   `password` varchar(255) NOT NULL,
   `nickname` varchar(20) NOT NULL,
   `role` varchar(10) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `slogin`
 --
 
 INSERT INTO `slogin` (`id`, `username`, `password`, `nickname`, `role`) VALUES
-(7, 'guest', '084e0343a0486ff05530df6c705c8bb4', 'Stock', 'stock');
+(7, 'guest', '084e0343a0486ff05530df6c705c8bb4', 'Admin', 'stock'),
+(13, 'fajar', '24bc50d85ad8fa9cda686145cf1f8aca', 'Fajar', 'stock'),
+(14, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Admin', 'stock'),
+(15, 'rizky', '202cb962ac59075b964b07152d234b70', 'Rizky', 'stock');
 
 -- --------------------------------------------------------
 
@@ -121,15 +124,16 @@ CREATE TABLE `sstock_brg` (
   `stock` int(12) NOT NULL,
   `satuan` varchar(10) NOT NULL,
   `lokasi` varchar(55) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `sstock_brg`
 --
 
 INSERT INTO `sstock_brg` (`idx`, `nama`, `jenis`, `merk`, `ukuran`, `stock`, `satuan`, `lokasi`) VALUES
-(243, 'Mata Bor', 'Flame', 'Garryson', '50', 2992, 'Buah', 'PT Willtec'),
-(244, 'Mata Bor', 'Ball Nosed Cone', 'Garryson', '17', 1000, 'Unit', 'PT Wiltec');
+(243, 'Mata Bor', 'Flame', 'Garryson', '50', 2992, 'Buah', 'Gudang A'),
+(244, 'Mata Bor', 'Ball Nosed Cone', 'Garryson', '17', 1000, 'Unit', 'Gudang A'),
+(245, 'Cat', 'Cat Tembok', 'No Drop', '1 Liter', 100, 'Buah', 'Gudang A');
 
 --
 -- Indexes for dumped tables
@@ -173,7 +177,7 @@ ALTER TABLE `sstock_brg`
 -- AUTO_INCREMENT for table `notes`
 --
 ALTER TABLE `notes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `sbrg_keluar`
@@ -191,13 +195,13 @@ ALTER TABLE `sbrg_masuk`
 -- AUTO_INCREMENT for table `slogin`
 --
 ALTER TABLE `slogin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `sstock_brg`
 --
 ALTER TABLE `sstock_brg`
-  MODIFY `idx` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=245;
+  MODIFY `idx` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=246;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
